@@ -1,38 +1,72 @@
-<style>
-    * {
-        border: none;
-        margin: 0;
-    }
+<!DOCTYPE html>
+<html lang="zh-CN">
 
-    video {
-        height: 100vh;
-        width: 100vw;
-    }
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0,viewport-fit=cover">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="icon" href="data:image/ico;base64,aWNv">
+    <link rel="preconnect" href="https://static.kaishustory.com" crossorigin>
+    <link rel="dns-prefetch" href="https://static.kaishustory.com">
+    <link rel="dns-prefetch" href="https://cdn.kaishuhezi.com">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            cursor: pointer;
+            vertical-align: baseline;
+            font-family: inherit;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
 
-    .time {
-        background-color: #fff;
-        position: absolute;
-        top: 57.5vh;
-        font-size: 4.2vw;
-        font-family: PingFangSC-Medium, PingFang SC, Arial, Helvetica, sans-serif;
-        color: #000;
-    }
+        video {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
 
-    body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+        .time {
+            background-color: #fff;
+            position: absolute;
+            top: 57.5vh;
+            font-size: 4.2vw;
+            font-family: PingFangSC-Medium, PingFang SC, Arial, Helvetica, sans-serif;
+            color: #000;
+        }
 
-    .img {
-        height: 7vw;
-        background-color: #4444ee;
-        position: absolute;
-        top: 1vh;
-        left: 5.1vw;
-        z-index: 10;
-    }
-</style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            background-color: #000;
+        }
+
+        .img {
+            height: 7vw;
+            background-color: #4444ee;
+            position: absolute;
+            top: 1vh;
+            left: 5vw;
+            z-index: 10;
+        }
+    </style>
+
+</head>
 
 <body>
     <video onclick="play()" loop id="video" autoplay x5-playsinline="" webkit-playsinline="" playsInline
@@ -40,8 +74,6 @@
     <div class="time"></div>
     <img src="https://static.kaishustory.com/medias/131659529257_.pic.jpg" class="img">
 </body>
-
-</div>
 <script>
     function play() {
         document.querySelector('#video').play()
@@ -68,4 +100,23 @@
             .replace('mm', m.padStart(2, '0'))
             .replace('ss', s.padStart(2, '0'));
     }
+
+    window.KSJSBridge = window.KSJSBridge || {};
+    var callback = 'aaaa';
+    window.KSJSBridge[callback] = function () { }
+    var nativeParams = {
+        name: 'setStatusbarStyle',
+        params: {
+            style: 'light-content'
+        },
+        callback: callback,
+        options: {
+            async: false,
+            callback: callback,
+        },
+    };
+    var nativeParamsStr = JSON.stringify(nativeParams);
+    window.webkit.messageHandlers.hybridCall.postMessage(nativeParamsStr);
 </script>
+
+</html>
